@@ -53,7 +53,7 @@ export const SelectScreen: React.FC = () => {
         initial={{ y: -20 }}
         animate={{ y: 0 }}
       >
-        🎁 Gizli Noel Baba Kurası
+        🎁 Noel Çekilişi 2025
       </motion.h1>
       
       <p className="select-subtitle">

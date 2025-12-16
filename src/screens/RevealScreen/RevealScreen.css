@@ -1,0 +1,131 @@
+.reveal-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  gap: 2rem;
+}
+
+.reveal-screen.error-state {
+  color: #ff6b6b;
+}
+
+.reveal-card {
+  width: 100%;
+  max-width: 400px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    0 0 100px rgba(255, 215, 0, 0.1);
+}
+
+.reveal-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.reveal-emoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.reveal-title {
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.reveal-content {
+  text-align: center;
+}
+
+.giver-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.giver-name {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.arrow {
+  color: #ffd700;
+  font-size: 1.5rem;
+}
+
+.receiver-box {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 215, 0, 0.15) 0%,
+    rgba(255, 140, 0, 0.1) 100%
+  );
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.gift-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.receiver-name {
+  font-size: 2rem;
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 20px rgba(255, 215, 0, 0.5);
+}
+
+.receiver-hint {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.reveal-note {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.reveal-note p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.done-button {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 25px rgba(78, 205, 196, 0.4);
+  transition: all 0.3s ease;
+}
+
+.done-button:hover {
+  box-shadow: 0 8px 30px rgba(78, 205, 196, 0.5);
+}

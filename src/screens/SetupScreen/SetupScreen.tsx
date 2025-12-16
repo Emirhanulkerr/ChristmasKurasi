@@ -12,6 +12,8 @@ export const SetupScreen: React.FC = () => {
   const [newName, setNewName] = useState('');
   const [error, setError] = useState('');
   const [showAdminReset, setShowAdminReset] = useState(false);
+  const [shareLink, setShareLink] = useState('');
+  const [copied, setCopied] = useState(false);
   
   const { 
     participants, 
@@ -21,6 +23,7 @@ export const SetupScreen: React.FC = () => {
     resetAll,
     soundEnabled,
     isDrawComplete,
+    generateShareLink,
   } = useSecretSantaStore();
 
   const handleAddParticipant = (e: React.FormEvent) => {
@@ -63,8 +66,30 @@ export const SetupScreen: React.FC = () => {
     if (success) {
       playSound('success', soundEnabled);
       triggerHaptic('heavy');
+      // Generate share link after successful draw
+      const link = generateShareLink();
+      setShareLink(link);
     } else {
       setError('Kura çekilirken bir hata oluştu');
+    }
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareLink);
+      setCopied(true);
+      playSound('click', soundEnabled);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = shareLink;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
@@ -184,6 +209,37 @@ export const SetupScreen: React.FC = () => {
         >
           🎲 Kurayı Çek ({participants.length}/2 minimum)
         </motion.button>
+      )}
+
+      {/* Share Link Section - Shows after draw */}
+      {isDrawComplete && (
+        <motion.div 
+          className="share-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <h3 className="share-title">🔗 Paylaşım Linki</h3>
+          <p className="share-description">
+            Bu linki katılımcılarla paylaşın. Herkes kendi cihazından girip kurasını görebilir!
+          </p>
+          <div className="share-link-container">
+            <input 
+              type="text" 
+              value={shareLink || generateShareLink()} 
+              readOnly 
+              className="share-link-input"
+              onClick={(e) => (e.target as HTMLInputElement).select()}
+            />
+            <motion.button
+              className="copy-button"
+              onClick={handleCopyLink}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {copied ? '✅ Kopyalandı!' : '📋 Kopyala'}
+            </motion.button>
+          </div>
+        </motion.div>
       )}
 
       {/* Admin Reset Button */}

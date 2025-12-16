@@ -41,4 +41,15 @@ export interface SecretSantaStore extends AppState {
   setScreen: (screen: AppState['currentScreen']) => void;
   toggleSound: () => void;
   isParticipantRevealed: (participantId: string) => boolean;
+  // Share functionality
+  generateShareLink: () => string;
+  loadFromShareData: (data: string) => boolean;
+  isSharedSession: boolean;
+  setIsSharedSession: (value: boolean) => void;
+}
+
+// Data structure for sharing via URL
+export interface ShareData {
+  participants: Participant[];
+  assignments: Assignment[];
 }

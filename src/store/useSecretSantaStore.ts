@@ -4,7 +4,7 @@
  */
 
 import { create } from 'zustand';
-import type { SecretSantaStore, Participant, AppState } from '../types';
+import type { SecretSantaStore, Participant, AppState, ShareData } from '../types';
 import { generateDerangement, validateAssignments } from '../utils/derangement';
 import { saveState, loadState, clearState } from '../utils/storage';
 
@@ -229,6 +229,59 @@ export const useSecretSantaStore = create<SecretSantaStore>((set, get) => {
     // Check if participant has revealed
     isParticipantRevealed: (participantId: string) => {
       return get().revealedParticipants.has(participantId);
+    },
+
+    // Share functionality
+    isSharedSession: false,
+    
+    setIsSharedSession: (value: boolean) => {
+      set({ isSharedSession: value });
+    },
+
+    // Generate a shareable link with encoded data
+    generateShareLink: () => {
+      const state = get();
+      const shareData: ShareData = {
+        participants: state.participants,
+        assignments: state.assignments,
+      };
+      
+      const encoded = btoa(encodeURIComponent(JSON.stringify(shareData)));
+      const baseUrl = window.location.origin + window.location.pathname;
+      return `${baseUrl}?kura=${encoded}`;
+    },
+
+    // Load state from shared data
+    loadFromShareData: (encodedData: string) => {
+      try {
+        const decoded = decodeURIComponent(atob(encodedData));
+        const shareData: ShareData = JSON.parse(decoded);
+        
+        // Validate the data
+        if (!shareData.participants || !shareData.assignments) {
+          console.error('Invalid share data structure');
+          return false;
+        }
+        
+        if (!validateAssignments(shareData.participants, shareData.assignments)) {
+          console.error('Invalid assignments in share data');
+          return false;
+        }
+        
+        set({
+          participants: shareData.participants,
+          assignments: shareData.assignments,
+          isDrawComplete: true,
+          currentScreen: 'select',
+          revealedParticipants: new Set(),
+          isSharedSession: true,
+        });
+        
+        return true;
+      } catch (error) {
+        console.error('Failed to parse share data:', error);
+        return false;
+      }
     },
   };
 });

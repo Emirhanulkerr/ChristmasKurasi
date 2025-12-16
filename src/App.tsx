@@ -12,7 +12,21 @@ import { preloadSounds } from './utils/sound';
 import './App.css';
 
 function App() {
-  const { currentScreen } = useSecretSantaStore();
+  const { currentScreen, loadFromShareData, isDrawComplete } = useSecretSantaStore();
+
+  // Check for shared link on mount
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const kuraData = urlParams.get('kura');
+    
+    if (kuraData && !isDrawComplete) {
+      const success = loadFromShareData(kuraData);
+      if (success) {
+        // Clean the URL without reloading
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }
+  }, [loadFromShareData, isDrawComplete]);
 
   // Preload sounds on mount
   useEffect(() => {

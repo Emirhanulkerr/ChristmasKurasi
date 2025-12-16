@@ -252,3 +252,74 @@
 .reset-button:hover {
   background: rgba(255, 107, 107, 0.4);
 }
+
+/* Share Section */
+.share-section {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(78, 205, 196, 0.1);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.share-title {
+  font-size: 1.3rem;
+  color: #4ecdc4;
+  margin-bottom: 0.5rem;
+}
+
+.share-description {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.share-link-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 480px) {
+  .share-link-container {
+    flex-direction: row;
+  }
+}
+
+.share-link-input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  font-size: 0.85rem;
+  border: 2px solid rgba(78, 205, 196, 0.3);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #4ecdc4;
+  font-family: monospace;
+  text-overflow: ellipsis;
+}
+
+.share-link-input:focus {
+  outline: none;
+  border-color: #4ecdc4;
+}
+
+.copy-button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.copy-button:hover {
+  box-shadow: 0 4px 20px rgba(78, 205, 196, 0.4);
+}

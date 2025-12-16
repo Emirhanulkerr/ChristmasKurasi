@@ -111,12 +111,6 @@ export const ChristmasTree: React.FC<ChristmasTreeProps> = ({ className, style }
       side: THREE.DoubleSide
     });
 
-    const ornamentMaterial = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
-      roughness: 0.2,
-      metalness: 0.8,
-    });
-
     // Custom shader material for lights to handle flickering
     const lightUniforms = {
       uTime: { value: 0 },
@@ -269,7 +263,6 @@ export const ChristmasTree: React.FC<ChristmasTreeProps> = ({ className, style }
     const foliageStart = 0.8; // Where foliage begins (shows trunk below)
     const foliageEnd = foliageStart + treeHeight; // Top of tree
     const halfTopAngle = 40 * Math.PI / 180; // 80 degree top angle -> 40 degree half (MUCH WIDER)
-    const maxRadius = treeHeight * Math.tan(halfTopAngle); // Base radius of triangle
 
     for (let i = 0; i < layers; i++) {
       const t = i / layers; // 0 to 1 (bottom to top)

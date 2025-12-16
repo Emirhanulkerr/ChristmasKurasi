@@ -112,7 +112,7 @@ export const SetupScreen: React.FC = () => {
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 200 }}
       >
-        🎄 Yılbaşı Gizli Noel Baba 🎅
+        🎄 Noel Çekilişi 2025 🎅
       </motion.h1>
       
       <p className="setup-subtitle">
